@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  study_go:
+    container_name: study_go
+    build: .
+    volumes:
+      - ./:/go/src/app
+    ports:
+      - "3000:3000"
+    working_dir: /go/src/app
+    tty: true
+
+  go-postgres:
+    image: library/postgres:10.14
+    container_name: go-postgres
+    environment:
+      POSTGRES_DB: "dbname"
+      POSTGRES_USER: "root"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - 54325:5432
+    volumes:
+      - ../db-dumps:/var/db-dumps
+      - go_postgres_data10:/var/lib/postgresql/data10
+
+volumes:
+  go_postgres_data10: {}
+

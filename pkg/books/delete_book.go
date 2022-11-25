@@ -12,7 +12,7 @@ func (h handler) DeleteBook(c *gin.Context) {
 
 	var book models.Book
 
-	if result := h.DB.First(&book, id); result != nil {
+	if result := h.DB.First(&book, id); result.Error != nil {
 		c.AbortWithError(http.StatusNotFound, result.Error)
 		return
 	}

@@ -15,6 +15,7 @@ func RegisterRoutes(r *gin.Engine, db *gorm.DB) {
 	}
 
 	routes := r.Group("/books")
+
 	routes.POST("/", h.AddBook)
 	routes.GET("/", h.GetBooks)
 	routes.GET("/:id", h.GetBook)
